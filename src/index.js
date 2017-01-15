@@ -41,14 +41,7 @@ const updated = cache.getUpdatedFiles(files);
 
 console.log(`${updated.length} modified files.`);
 
-let newArgs = null;
-
-if (updated && updated.length > 0) {
-  newArgs = [src, '--only', updated.join(',')].concat(options);
-} else {
-  console.log('Nothing to do.');
-  process.exit(0);
-}
+const newArgs = [src, '--only', updated.join(',')].concat(options);
 
 console.log('> babel ' + newArgs.join(' '));
 
@@ -70,4 +63,3 @@ term.on('exit', (code)  => {
   console.log('babel-changed detected exit code ',code);
   if (code === 0) cache.reconcile();
 });
-
